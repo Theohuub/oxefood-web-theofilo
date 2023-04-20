@@ -1,10 +1,41 @@
+import axios from "axios";
 import React from "react";
-import InputMask from 'react-input-mask';
-import { Form, Input, TextArea, Button, Select,Container, Divider,Icon } from 'semantic-ui-react'
+import { Button, Container, Divider, Form, Icon, TextArea } from 'semantic-ui-react';
 
 
 
-class FormCliente extends React.Component{
+class FormProduto extends React.Component{
+
+	state = {
+
+		codigo:null,
+		titulo: null,
+		descricao: null,
+		valorUnitario: null,
+		tempoEntregaMinimo: null,
+		tempoEntregaMaximo: null
+	}
+
+	salvar = () => {
+
+		let produtoRequest = {
+
+			codigo: this.state.codigo,
+			titulo: this.state.titulo,
+			descricao: this.state.descricao,
+			valorUnitario: this.state.valorUnitario,
+			tempoEntregaMinimo: this.state.tempoEntregaMinimo,
+			tempoEntregaMaximo: this.state.tempoEntregaMaximo
+		}
+
+		axios.post("http://localhost:8082/api/produto", produtoRequest)
+			.then((response) => {
+				console.log('Produto cadastrado com sucesso.')
+			})
+			.catch((error) => {
+				console.log('Erro ao incluir o um produto.')
+			})
+	}
 
     render(){
         return(
@@ -31,6 +62,8 @@ class FormCliente extends React.Component{
 										width={10}
                                         maxLength="20"
                                         placeholder="Informe o título do produto"
+										value={this.state.titulo}
+										onChange={e => this.setState({ titulo: e.target.value })}
 									/>
 
 									<Form.Input
@@ -39,7 +72,12 @@ class FormCliente extends React.Component{
                                         width={6}
                                         maxLength="2"
                                         placeholder="Informe o código do produto    "
-										label='Código do Produto'>
+										label='Código do Produto'
+										value={this.state.codigo}
+										onChange={e => this.setState({ codigo: e.target.value })}
+										>
+											
+											
                                                                                                                   
 									</Form.Input>
 
@@ -49,6 +87,8 @@ class FormCliente extends React.Component{
                                     control={TextArea}
                                     label='Descrição'
                                     placeholder='Informe a descrição do produto'
+									value={this.state.descricao}
+									onChange={e => this.setState({ descricao: e.target.value })}
                                     />
                                 
                                 <Form.Group>
@@ -57,7 +97,11 @@ class FormCliente extends React.Component{
 									<Form.Input
 										fluid
 										label='Valor Unitário'
-                                        width={6}>				
+                                        width={6}
+										value={this.state.valorUnitario}
+										onChange={e => this.setState({ valorUnitario: e.target.value })}
+										>	
+													
 									</Form.Input>
 
 									<Form.Input
@@ -65,16 +109,21 @@ class FormCliente extends React.Component{
 										label='Tempo de Entrega Mínimo em minutos'
                                         maxLength="2"
                                         placeholder="30"
-                                        width={6}>
+                                        width={6}
+										value={this.state.tempoEntregaMinimo}
+										onChange={e => this.setState({ tempoEntregaMinimo: e.target.value })}
+										>
 										
 									</Form.Input>
 
                                     <Form.Input
                                         fluid
-                                        label='Tempo de Entrega Mínimo em minutos'
+                                        label='Tempo de Entrega Máximo em minutos'
                                         maxLength="2"
                                         placeholder="40"
                                         width={6}
+										value={this.state.tempoEntregaMaximo}
+										onChange={e => this.setState({ tempoEntregaMaximo: e.target.value })}
                                     >
                 
                                     </Form.Input>
@@ -124,4 +173,4 @@ class FormCliente extends React.Component{
 	}
 }
 
-export default FormCliente;
+export default FormProduto;
