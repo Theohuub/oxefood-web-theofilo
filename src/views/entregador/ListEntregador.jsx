@@ -66,7 +66,7 @@ render(){
 
                         <br/><br/><br/>
                       
-                      <Table color='orange' sortable celled>
+                        <Table color='orange' sortable celled style={{marginLeft:'-20%'}}>
 
                           <Table.Header>
                               <Table.Row>
@@ -85,10 +85,10 @@ render(){
                                   <Table.HeaderCell>Endereço UF</Table.HeaderCell>
                                   <Table.HeaderCell>Endereço Complemento</Table.HeaderCell>
                                   <Table.HeaderCell>Ativo</Table.HeaderCell>
-                                  <Table.HeaderCell textAlign='center' width={3}>Ações</Table.HeaderCell>
+                                  <Table.HeaderCell textAlign='center' width={2} style={{paddingRight:'40px', paddingLeft:'40px'}}>Ações</Table.HeaderCell>
                               </Table.Row>
                           </Table.Header>
-                     
+                         
                           <Table.Body>
 
                               { this.state.listaEntregadores.map(entregador => (
